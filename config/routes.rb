@@ -17,6 +17,9 @@ Hvz::Application.routes.draw do
 		resources :infractions
 	end
 	match "/players/:id/submitwaiver/:has" => "registrations#submit_waiver", :as => "submit_waiver"
+  namespace "api" do
+    resources "game"
+  end
 	match 'games/:id/rules' => "games#rules", :as => "game_rules"
 	match 'games/:id/graphdata' => "games#graphdata", :as => "game_graph_data"
 	match 'games/:id/tree' => "games#tree", :as => "game_tree"
