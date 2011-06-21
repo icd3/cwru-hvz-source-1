@@ -123,9 +123,9 @@ ActiveRecord::Schema.define(:version => 20110616213129) do
   create_table "squads", :force => true do |t|
     t.string   "name"
     t.integer  "leader_id"
-    t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "game_id"
   end
 
   create_table "tags", :force => true do |t|
