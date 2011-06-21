@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(:version => 20110616213129) do
     t.string   "regarding"
     t.text     "body"
     t.datetime "occurred"
-    t.integer  "game_id"
-    t.boolean  "visible",    :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "game_id"
+    t.boolean  "visible",    :default => true
   end
 
   create_table "delayed_jobs", :force => true do |t|
