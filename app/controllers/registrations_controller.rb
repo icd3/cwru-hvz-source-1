@@ -1,6 +1,7 @@
 class RegistrationsController < ApplicationController
 	before_filter :check_admin, :only => [:index, :destroy, :submit_waiver]
 	before_filter :check_login, :only => [:new, :create, :show]
+  layout "expanded", :only => [:new]
 	def new
 		if @current_game.id.nil? or @current_game.registration_begins.nil? or @current_game.registration_ends.nil?
 			flash[:error] = "Your administrators have not yet created a game to register for."
@@ -10,15 +11,18 @@ class RegistrationsController < ApplicationController
 		if (Time.now + @current_game.utc_offset) < @current_game.registration_begins
 			flash[:error] = "Registration begins " + @current_game.dates[:registration_begins] + ". Please check back then!"
 			redirect_to root_url()
+      return
 		end
 		if (Time.now + @current_game.utc_offset) > @current_game.registration_ends
 			flash[:error] = "Registration ended " + @current_game.dates[:registration_ends] + ". If you would still like to play, please contact the administrators."
 			redirect_to root_url()
+      return
 		end
 		@registration = Registration.find_or_initialize_by_person_id_and_game_id(@person.id, @current_game.id)
     @squads = @current_game.squads
 		if not @registration.card_code.nil?
 			redirect_to registration_url(@registration)
+      return
 		end
 	end
 	def submit_waiver

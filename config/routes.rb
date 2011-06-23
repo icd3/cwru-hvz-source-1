@@ -1,10 +1,9 @@
 Hvz::Application.routes.draw do
   get "feeds/create"
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-  	match "/people/login/" => "people#login"
-  	match "/people/logout/" => "people#logout"
+  match "/people/login/" => "people#login"
+  match "/people/logout/" => "people#logout"
+
 	resources :people, :games, :tags, :feeds
 	resources :attendances
 	resources :missions, :id => /[0-9]*/ do
